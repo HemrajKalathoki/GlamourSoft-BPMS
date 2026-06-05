@@ -319,10 +319,10 @@ include('includes/dbconnection.php');
                         <div class="service-footer">
 
                             <div class="service-price">
-                                $<?php echo $row['Cost']; ?>
+                                Rs. <?php echo $row['Cost']; ?>
                             </div>
 
-                            <a href="appointment.php"
+                            <a href="book-appointment.php"
                                class="btn book-btn">
                                 Book Now
                             </a>
