@@ -306,7 +306,7 @@ if (strlen($_SESSION['bpmsaid'] == 0)) {
                 </div>
             </div>
             <div class="stat-chip">
-                <div class="stat-chip-icon"><i class="bi bi-currency-rupee"></i></div>
+                <div class="stat-chip-icon">Rs.</div>
                 <div>
                     <div class="stat-chip-val">Rs. <?php echo number_format($total_cost, 0); ?></div>
                     <div class="stat-chip-label">Combined Price Value</div>
@@ -384,7 +384,7 @@ if (strlen($_SESSION['bpmsaid'] == 0)) {
                                 <!-- Price -->
                                 <td>
                                     <span class="price-badge">
-                                        <i class="bi bi-currency-rupee"></i>
+                                        Rs. 
                                         <?php echo htmlspecialchars($row['Cost']); ?>
                                     </span>
                                 </td>
