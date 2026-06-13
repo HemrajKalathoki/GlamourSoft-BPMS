@@ -1,4 +1,4 @@
-```php
+
 <?php
 session_start();
 error_reporting(0);
@@ -308,4 +308,4 @@ function disableOther(button) {
 </body>
 </html>
 <?php } ?>
-```
+
