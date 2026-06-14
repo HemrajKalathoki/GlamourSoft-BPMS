@@ -1,446 +1,437 @@
 <?php
-$contactQuery = mysqli_query($con, "SELECT * FROM tblpage WHERE PageType='contactus'");
-$contact = mysqli_fetch_array($contactQuery);
+/* ── contact info ── */
+$contactQuery = mysqli_query($con, "SELECT * FROM tblpage WHERE PageType='contactus' LIMIT 1");
+$contact      = mysqli_fetch_assoc($contactQuery);
 
-$aboutQuery = mysqli_query($con, "SELECT * FROM tblpage WHERE PageType='aboutus'");
-$about = mysqli_fetch_array($aboutQuery);
+/* ── real services from DB (max 6 for footer) ── */
+$svcQuery      = mysqli_query($con, "SELECT ID, ServiceName FROM tblservices ORDER BY ID ASC LIMIT 6");
+$footerSvcs    = [];
+while ($s = mysqli_fetch_assoc($svcQuery)) {
+    $footerSvcs[] = $s;
+}
 ?>
 
-<!-- FOOTER -->
+<!-- PRE-FOOTER CTA STRIP -->
+<div class="pre-footer-cta">
+    <div class="container">
+        <div class="pf-inner">
+            <div class="pf-text">
+                <h4>Ready for Your Glow-Up?</h4>
+                <p>Book your session today — walk in, walk out confident.</p>
+            </div>
+            <div class="pf-actions">
+                <a href="book-appointment.php" class="pf-btn-primary">
+                    <i class="bi bi-calendar-heart"></i>
+                    Book Appointment
+                </a>
+                <a href="services.php" class="pf-btn-ghost">
+                    <i class="bi bi-grid-3x3-gap"></i>
+                    View Services
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MAIN FOOTER -->
 <footer class="footer-section">
+
+    <!-- top gradient accent line -->
+    <div class="footer-top-line"></div>
 
     <div class="container">
 
         <div class="row g-5">
 
-            <!-- BRAND INFO -->
+            <!-- ── BRAND ── -->
             <div class="col-lg-4 col-md-6">
-
                 <div class="footer-brand">
 
-                    <h2>
+                    <a href="index.php" class="footer-logo">
                         <i class="bi bi-scissors"></i>
-                        GlamourSoft
-                    </h2>
+                        Glamour<span>Soft</span>
+                    </a>
 
                     <p>
-                        GlamourSoft Beauty Management System is a modern salon
-                        management platform developed for beauty parlours,
-                        salons, and spa businesses in Nepal.
+                        GlamourSoft is a modern beauty parlour management
+                        platform built for salons, spas, and wellness businesses
+                        across Nepal. Your confidence is our craft.
                     </p>
 
+                    <!-- ⚠ Update these href values with your real social profile URLs -->
                     <div class="footer-social">
-
-                        <a href="#">
+                        <a href="#" aria-label="Facebook" title="Follow us on Facebook">
                             <i class="bi bi-facebook"></i>
                         </a>
-
-                        <a href="#">
+                        <a href="#" aria-label="Instagram" title="Follow us on Instagram">
                             <i class="bi bi-instagram"></i>
                         </a>
-
-                        <a href="#">
+                        <a href="#" aria-label="TikTok" title="Follow us on TikTok">
                             <i class="bi bi-tiktok"></i>
                         </a>
-
-                        <a href="#">
+                        <a href="#" aria-label="YouTube" title="Subscribe on YouTube">
                             <i class="bi bi-youtube"></i>
                         </a>
-
                     </div>
 
                 </div>
-
             </div>
 
-            <!-- QUICK LINKS -->
-            <div class="col-lg-2 col-md-6">
-
-                <h5 class="footer-title">
-                    Quick Links
-                </h5>
-
+            <!-- ── QUICK LINKS ── -->
+            <div class="col-lg-2 col-md-6 col-6">
+                <h5 class="footer-title">Quick Links</h5>
                 <ul class="footer-links">
-
-                    <li>
-                        <a href="index.php">
-                            <i class="bi bi-chevron-right"></i>
-                            Home
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="about.php">
-                            <i class="bi bi-chevron-right"></i>
-                            About
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="services.php">
-                            <i class="bi bi-chevron-right"></i>
-                            Services
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="contact.php">
-                            <i class="bi bi-chevron-right"></i>
-                            Contact
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="book-appointment.php">
-                            <i class="bi bi-chevron-right"></i>
-                            Book Appointment
-                        </a>
-                    </li>
-
+                    <li><a href="index.php"><i class="bi bi-chevron-right"></i>Home</a></li>
+                    <li><a href="about.php"><i class="bi bi-chevron-right"></i>About Us</a></li>
+                    <li><a href="services.php"><i class="bi bi-chevron-right"></i>Services</a></li>
+                    <li><a href="contact.php"><i class="bi bi-chevron-right"></i>Contact</a></li>
+                    <li><a href="book-appointment.php"><i class="bi bi-chevron-right"></i>Book Appointment</a></li>
+                    <?php if (empty($_SESSION['bpmsuid'])): ?>
+                    <li><a href="login.php"><i class="bi bi-chevron-right"></i>Login</a></li>
+                    <li><a href="signup.php"><i class="bi bi-chevron-right"></i>Register</a></li>
+                    <?php else: ?>
+                    <li><a href="booking-history.php"><i class="bi bi-chevron-right"></i>My Bookings</a></li>
+                    <li><a href="invoice-history.php"><i class="bi bi-chevron-right"></i>My Invoices</a></li>
+                    <?php endif; ?>
                 </ul>
-
             </div>
 
-            <!-- OUR SERVICES -->
-            <div class="col-lg-3 col-md-6">
-
-                <h5 class="footer-title">
-                    Beauty Services
-                </h5>
-
+            <!-- ── SERVICES FROM DB ── -->
+            <div class="col-lg-3 col-md-6 col-6">
+                <h5 class="footer-title">Our Services</h5>
                 <ul class="footer-links">
-
-                    <li>
-                        <a href="#">
-                            <i class="bi bi-check-circle"></i>
-                            Bridal Makeup
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="#">
-                            <i class="bi bi-check-circle"></i>
-                            Facial & Cleanup
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="#">
-                            <i class="bi bi-check-circle"></i>
-                            Hair Smoothening
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="#">
-                            <i class="bi bi-check-circle"></i>
-                            Threading & Waxing
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="#">
-                            <i class="bi bi-check-circle"></i>
-                            Spa & Massage
-                        </a>
-                    </li>
-
+                    <?php if (!empty($footerSvcs)): ?>
+                        <?php foreach ($footerSvcs as $svc): ?>
+                        <li>
+                            <a href="services.php">
+                                <i class="bi bi-check-circle"></i>
+                                <?php echo htmlspecialchars($svc['ServiceName']); ?>
+                            </a>
+                        </li>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <li><a href="services.php"><i class="bi bi-check-circle"></i>View All Services</a></li>
+                    <?php endif; ?>
                 </ul>
-
             </div>
 
-            <!-- CONTACT INFO -->
+            <!-- ── CONTACT ── -->
             <div class="col-lg-3 col-md-6">
-
-                <h5 class="footer-title">
-                    Contact Us
-                </h5>
-
+                <h5 class="footer-title">Get In Touch</h5>
                 <div class="footer-contact">
 
+                    <?php if (!empty($contact['PageDescription'])): ?>
                     <div class="contact-box">
-
-                        <div class="icon">
-                            <i class="bi bi-geo-alt-fill"></i>
+                        <div class="fc-icon"><i class="bi bi-geo-alt-fill"></i></div>
+                        <div class="fc-text">
+                            <span class="fc-label">Address</span>
+                            <p><?php echo htmlspecialchars($contact['PageDescription']); ?></p>
                         </div>
-
-                        <div class="text">
-                            <p>
-                                <?php echo htmlentities($contact['PageDescription']); ?>
-                            </p>
-                        </div>
-
                     </div>
+                    <?php endif; ?>
 
+                    <?php if (!empty($contact['MobileNumber'])): ?>
                     <div class="contact-box">
-
-                        <div class="icon">
-                            <i class="bi bi-telephone-fill"></i>
-                        </div>
-
-                        <div class="text">
-                            <a href="tel:+977<?php echo htmlentities($contact['MobileNumber']); ?>">
-                                +977 <?php echo htmlentities($contact['MobileNumber']); ?>
+                        <div class="fc-icon"><i class="bi bi-telephone-fill"></i></div>
+                        <div class="fc-text">
+                            <span class="fc-label">Phone</span>
+                            <a href="tel:+977<?php echo htmlspecialchars($contact['MobileNumber']); ?>">
+                                +977 <?php echo htmlspecialchars($contact['MobileNumber']); ?>
                             </a>
                         </div>
-
                     </div>
+                    <?php endif; ?>
 
+                    <?php if (!empty($contact['Email'])): ?>
                     <div class="contact-box">
-
-                        <div class="icon">
-                            <i class="bi bi-envelope-fill"></i>
-                        </div>
-
-                        <div class="text">
-                            <a href="mailto:<?php echo htmlentities($contact['Email']); ?>">
-                                <?php echo htmlentities($contact['Email']); ?>
+                        <div class="fc-icon"><i class="bi bi-envelope-fill"></i></div>
+                        <div class="fc-text">
+                            <span class="fc-label">Email</span>
+                            <a href="mailto:<?php echo htmlspecialchars($contact['Email']); ?>">
+                                <?php echo htmlspecialchars($contact['Email']); ?>
                             </a>
                         </div>
-
                     </div>
+                    <?php endif; ?>
+
+                    <?php if (!empty($contact['Timing'])): ?>
+                    <div class="contact-box">
+                        <div class="fc-icon"><i class="bi bi-clock-fill"></i></div>
+                        <div class="fc-text">
+                            <span class="fc-label">Hours</span>
+                            <p><?php echo htmlspecialchars($contact['Timing']); ?></p>
+                        </div>
+                    </div>
+                    <?php endif; ?>
 
                 </div>
-
             </div>
 
-        </div>
-
-        <!-- ABOUT SECTION -->
-        <!-- <div class="footer-about mt-5">
-
-            <div class="row">
-
-                <div class="col-lg-12">
-
-                    <div class="about-card">
-
-                        <h4>
-                            <?php echo htmlentities($about['PageTitle']); ?>
-                        </h4>
-
-                        <p>
-                            <?php echo htmlentities($about['PageDescription']); ?>
-                        </p>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div> -->
+        </div><!-- /.row -->
 
         <!-- FOOTER BOTTOM -->
         <div class="footer-bottom">
-
-            <div class="row align-items-center">
-
+            <div class="row align-items-center g-2">
                 <div class="col-md-6">
-
                     <p class="mb-0">
-                        © <?php echo date('Y'); ?>
-                        GlamourSoft - Beauty Management
+                        &copy; <?php echo date('Y'); ?>
+                        <a href="index.php" class="footer-bottom-brand">GlamourSoft</a>
+                        &mdash; Beauty Management System
                     </p>
-
                 </div>
-
                 <div class="col-md-6 text-md-end">
-
                     <p class="mb-0">
-                        Developed in Ghorahi, Dang, Nepal 🇳🇵
+                        <i class="bi bi-heart-fill" style="color:#e91e63;font-size:.75rem;"></i>
+                        Crafted in Dang, Nepal &nbsp;🇳🇵
                     </p>
-
                 </div>
-
             </div>
-
         </div>
 
     </div>
-
 </footer>
 
-<!-- FOOTER STYLE -->
 <style>
+    /* ─── PRE-FOOTER CTA ──────────────────────────────────── */
+    .pre-footer-cta {
+        background: linear-gradient(135deg, #e91e63 0%, #ff4f81 100%);
+        padding: 44px 0;
+    }
+    .pf-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        flex-wrap: wrap;
+    }
+    .pf-text h4 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #fff;
+        margin-bottom: 4px;
+    }
+    .pf-text p {
+        color: rgba(255,255,255,.82);
+        margin: 0;
+        font-size: .92rem;
+    }
+    .pf-actions { display: flex; gap: 12px; flex-wrap: wrap; }
 
-    .footer-section{
-        background:#111827;
-        color:#d1d5db;
-        padding:90px 0 25px;
-        position:relative;
+    .pf-btn-primary {
+        display: inline-flex;
+        align-items: center; gap: 7px;
+        background: #fff;
+        color: #e91e63;
+        border-radius: 30px;
+        padding: 12px 26px;
+        font-size: .88rem;
+        font-weight: 700;
+        text-decoration: none;
+        box-shadow: 0 6px 20px rgba(0,0,0,.15);
+        transition: transform .2s, box-shadow .2s;
+        white-space: nowrap;
+    }
+    .pf-btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 28px rgba(0,0,0,.2);
+        color: #c2185b;
     }
 
-    .footer-brand h2{
-        color:#fff;
-        font-weight:700;
-        margin-bottom:20px;
+    .pf-btn-ghost {
+        display: inline-flex;
+        align-items: center; gap: 7px;
+        background: rgba(255,255,255,.15);
+        color: #fff;
+        border: 1.5px solid rgba(255,255,255,.5);
+        border-radius: 30px;
+        padding: 12px 24px;
+        font-size: .88rem;
+        font-weight: 600;
+        text-decoration: none;
+        transition: background .2s, border-color .2s;
+        white-space: nowrap;
+    }
+    .pf-btn-ghost:hover {
+        background: rgba(255,255,255,.25);
+        border-color: rgba(255,255,255,.8);
+        color: #fff;
     }
 
-    .footer-brand h2 i{
-        color:#e91e63;
-        margin-right:10px;
+    /* ─── FOOTER ──────────────────────────────────────────── */
+    .footer-section {
+        background: #0f172a;
+        color: #94a3b8;
+        padding: 72px 0 0;
+        position: relative;
+        font-family: 'Poppins', sans-serif;
     }
 
-    .footer-brand p{
-        line-height:1.9;
-        color:#9ca3af;
+    /* 3-px gradient accent at very top */
+    .footer-top-line {
+        position: absolute;
+        top: 0; left: 0; right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, #e91e63, #ff4f81, #e91e63);
     }
 
-    .footer-social{
-        display:flex;
-        gap:12px;
-        margin-top:25px;
+    /* ── brand ── */
+    .footer-logo {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 1.55rem;
+        font-weight: 700;
+        color: #fff;
+        text-decoration: none;
+        margin-bottom: 18px;
+    }
+    .footer-logo i  { color: #e91e63; }
+    .footer-logo span { font-weight: 500; color: #e2e8f0; }
+
+    .footer-brand p {
+        line-height: 1.85;
+        color: #64748b;
+        font-size: .88rem;
+        margin-bottom: 0;
     }
 
-    .footer-social a{
-        width:42px;
-        height:42px;
-        background:rgba(255,255,255,0.08);
-        border-radius:50%;
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        color:#fff;
-        transition:.3s;
-        text-decoration:none;
+    .footer-social {
+        display: flex;
+        gap: 10px;
+        margin-top: 24px;
+    }
+    .footer-social a {
+        width: 40px; height: 40px;
+        background: rgba(255,255,255,.06);
+        border: 1px solid rgba(255,255,255,.08);
+        border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+        color: #94a3b8;
+        font-size: .95rem;
+        text-decoration: none;
+        transition: background .22s, color .22s, transform .22s, border-color .22s;
+    }
+    .footer-social a:hover {
+        background: #e91e63;
+        border-color: #e91e63;
+        color: #fff;
+        transform: translateY(-4px);
     }
 
-    .footer-social a:hover{
-        background:#e91e63;
-        transform:translateY(-4px);
+    /* ── section title ── */
+    .footer-title {
+        color: #f1f5f9;
+        font-weight: 700;
+        font-size: .95rem;
+        margin-bottom: 28px;
+        position: relative;
+        padding-bottom: 12px;
+    }
+    .footer-title::after {
+        content: '';
+        position: absolute;
+        left: 0; bottom: 0;
+        width: 36px; height: 2.5px;
+        background: linear-gradient(90deg, #e91e63, #ff4f81);
+        border-radius: 10px;
     }
 
-    .footer-title{
-        color:#fff;
-        margin-bottom:25px;
-        font-weight:600;
-        position:relative;
+    /* ── links ── */
+    .footer-links { list-style: none; padding: 0; margin: 0; }
+    .footer-links li { margin-bottom: 11px; }
+    .footer-links a {
+        color: #64748b;
+        text-decoration: none;
+        font-size: .86rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        transition: color .2s, padding-left .2s;
+    }
+    .footer-links a:hover {
+        color: #fff;
+        padding-left: 4px;
+    }
+    .footer-links a i {
+        color: #e91e63;
+        font-size: .72rem;
+        flex-shrink: 0;
     }
 
-    .footer-title::after{
-        content:'';
-        position:absolute;
-        width:40px;
-        height:3px;
-        background:#e91e63;
-        left:0;
-        bottom:-10px;
-        border-radius:10px;
+    /* ── contact boxes ── */
+    .footer-contact { display: flex; flex-direction: column; gap: 18px; }
+
+    .contact-box {
+        display: flex;
+        align-items: flex-start;
+        gap: 13px;
     }
 
-    .footer-links{
-        list-style:none;
-        padding:0;
-        margin:0;
+    .fc-icon {
+        width: 38px; height: 38px;
+        background: rgba(233,30,99,.12);
+        border: 1px solid rgba(233,30,99,.2);
+        border-radius: 10px;
+        display: flex; align-items: center; justify-content: center;
+        color: #e91e63;
+        font-size: .9rem;
+        flex-shrink: 0;
     }
 
-    .footer-links li{
-        margin-bottom:14px;
+    .fc-label {
+        display: block;
+        font-size: .67rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: .8px;
+        color: #475569;
+        margin-bottom: 2px;
     }
-
-    .footer-links a{
-        color:#9ca3af;
-        text-decoration:none;
-        transition:.3s;
+    .fc-text p,
+    .fc-text a {
+        margin: 0;
+        color: #64748b;
+        font-size: .84rem;
+        line-height: 1.6;
+        text-decoration: none;
+        transition: color .2s;
     }
+    .fc-text a:hover { color: #fff; }
 
-    .footer-links a:hover{
-        color:#fff;
-        padding-left:6px;
+    /* ── bottom bar ── */
+    .footer-bottom {
+        border-top: 1px solid rgba(255,255,255,.06);
+        margin-top: 56px;
+        padding: 22px 0 24px;
+        font-size: .82rem;
+        color: #475569;
     }
-
-    .footer-links i{
-        color:#e91e63;
-        margin-right:8px;
+    .footer-bottom-brand {
+        color: #e91e63;
+        text-decoration: none;
+        font-weight: 600;
     }
+    .footer-bottom-brand:hover { color: #ff4f81; }
 
-    .contact-box{
-        display:flex;
-        align-items:flex-start;
-        margin-bottom:20px;
+    /* ─── RESPONSIVE ────────────────────────────────────────── */
+    @media (max-width: 767px) {
+        .pre-footer-cta { padding: 32px 0; }
+        .pf-inner { text-align: center; justify-content: center; }
+        .pf-text h4 { font-size: 1.2rem; }
+
+        .footer-section { padding: 56px 0 0; text-align: center; }
+
+        .footer-title::after { left: 50%; transform: translateX(-50%); }
+
+        .footer-logo { justify-content: center; }
+
+        .footer-social { justify-content: center; }
+
+        .footer-links a { justify-content: center; }
+
+        .contact-box { flex-direction: column; align-items: center; text-align: center; }
+
+        .footer-bottom { text-align: center; }
+        .footer-bottom .col-md-6:last-child { margin-top: 6px; }
     }
-
-    .contact-box .icon{
-        width:42px;
-        height:42px;
-        background:rgba(255,255,255,0.08);
-        border-radius:12px;
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        margin-right:15px;
-        color:#e91e63;
-        flex-shrink:0;
-    }
-
-    .contact-box .text p,
-    .contact-box .text a{
-        margin:0;
-        color:#9ca3af;
-        text-decoration:none;
-        line-height:1.8;
-    }
-
-    .contact-box .text a:hover{
-        color:#fff;
-    }
-
-    .footer-about{
-        margin-top:60px;
-    }
-
-    .about-card{
-        background:rgba(255,255,255,0.04);
-        padding:30px;
-        border-radius:20px;
-        border:1px solid rgba(255,255,255,0.05);
-    }
-
-    .about-card h4{
-        color:#fff;
-        margin-bottom:15px;
-    }
-
-    .about-card p{
-        color:#9ca3af;
-        line-height:1.9;
-        margin:0;
-    }
-
-    .footer-bottom{
-        border-top:1px solid rgba(255,255,255,0.08);
-        margin-top:50px;
-        padding-top:25px;
-        color:#9ca3af;
-        font-size:14px;
-    }
-
-    @media(max-width:768px){
-
-        .footer-section{
-            text-align:center;
-        }
-
-        .footer-title::after{
-            left:50%;
-            transform:translateX(-50%);
-        }
-
-        .footer-social{
-            justify-content:center;
-        }
-
-        .contact-box{
-            flex-direction:column;
-            align-items:center;
-        }
-
-        .contact-box .icon{
-            margin-right:0;
-            margin-bottom:10px;
-        }
-
-    }
-
 </style>
