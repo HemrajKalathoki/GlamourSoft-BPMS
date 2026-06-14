@@ -615,7 +615,7 @@ include('includes/dbconnection.php');
                         <img src="https://i.pravatar.cc/100?img=1">
 
                         <div class="ms-3">
-                            <h5 class="mb-0">Sophia</h5>
+                            <h5 class="mb-0">Sangita KC</h5>
                             <small class="text-muted">Customer</small>
                         </div>
 
@@ -639,7 +639,7 @@ include('includes/dbconnection.php');
                         <img src="https://i.pravatar.cc/100?img=5">
 
                         <div class="ms-3">
-                            <h5 class="mb-0">Emma</h5>
+                            <h5 class="mb-0">Barsha Sapkota</h5>
                             <small class="text-muted">Customer</small>
                         </div>
 
@@ -663,7 +663,7 @@ include('includes/dbconnection.php');
                         <img src="https://i.pravatar.cc/100?img=9">
 
                         <div class="ms-3">
-                            <h5 class="mb-0">Olivia</h5>
+                            <h5 class="mb-0">Muna Adhikari</h5>
                             <small class="text-muted">Customer</small>
                         </div>
 
