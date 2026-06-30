@@ -427,7 +427,7 @@ if (strlen($_SESSION['bpmsaid'] == 0)) {
                             <span class="svc-id">Service #<?php echo $row['ID']; ?></span>
                         </span>
                         <span class="svc-price">
-                            <i class="bi bi-currency-rupee"></i>
+                            <i class="bi">Rs.</i>
                             <?php echo number_format($row['Cost'], 0); ?>
                         </span>
                     </label>
