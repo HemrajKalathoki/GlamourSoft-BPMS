@@ -193,9 +193,9 @@ href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.m
                 <?php if (empty($_SESSION['bpmsuid'])) { ?>
 
                     <!-- ADMIN -->
-                    <a href="admin/index.php" class="btn btn-dark btn-auth">
+                    <!-- <a href="admin/index.php" class="btn btn-dark btn-auth">
                         <i class="bi bi-shield-lock"></i> Admin
-                    </a>
+                    </a> -->
 
                     <!-- LOGIN -->
                     <a href="login.php" class="btn btn-login btn-auth">
